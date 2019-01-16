@@ -4,12 +4,12 @@ package point.of.sale;
 public class Sale {
 	
 	HashStorage hashLookup;
-	ArtR56 artR56;
+	ArtR56Display artR56;
 	
 	public Sale () {
 		
 		//the display terminal is called ArtR56
-		artR56 = new ArtR56();
+		artR56 = new ArtR56Display();
 		
 		//Storage, add the items in the store
 		HashStorage hashLookup = new HashStorage();
