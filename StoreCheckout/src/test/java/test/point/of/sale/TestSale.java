@@ -15,7 +15,10 @@ public class TestSale {
 
 	@Test
 	public void testScan() {
-		Sale sale = new Sale();
+		
+		Display display = new FakeDisplay();
+		
+		Sale sale = new Sale(display);
 		sale.scan("1A");
 		//fail("Not yet implemented");
 	}

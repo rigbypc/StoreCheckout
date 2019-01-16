@@ -6,16 +6,22 @@ public class Sale {
 	HashStorage hashLookup;
 	Display display;
 	
-	public Sale () {
+	public Sale(Display display) {
+		init(display);
+	}
+	
+	public Sale() {
+		init(new ArtR56Display());
+	}
+	
+	public void init(Display display) {
 		
-		//the display terminal is called ArtR56
-		display = new FakeDisplay();
+		this.display = display;
 		
 		//Storage, add the items in the store
 		hashLookup = new HashStorage();
 		hashLookup.put("1A", "Milk, 3.99");
 		hashLookup.put("2A", "Bread, 4.99");
-		
 	}
 	
 	public void scan(String barcode) {
