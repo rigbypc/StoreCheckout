@@ -12,7 +12,7 @@ public class Sale {
 		display = new FakeDisplay();
 		
 		//Storage, add the items in the store
-		HashStorage hashLookup = new HashStorage();
+		hashLookup = new HashStorage();
 		hashLookup.put("1A", "Milk, 3.99");
 		hashLookup.put("2A", "Bread, 4.99");
 		
