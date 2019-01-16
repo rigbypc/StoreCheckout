@@ -16,11 +16,11 @@ public class TestSale {
 	@Test
 	public void testScan() {
 		
-		Display display = new FakeDisplay();
+		FakeDisplay display = new FakeDisplay();
 		
 		Sale sale = new Sale(display);
 		sale.scan("1A");
-		//fail("Not yet implemented");
+		assertEquals("Milk, 3.99", display.getLastLine());
 	}
 
 }

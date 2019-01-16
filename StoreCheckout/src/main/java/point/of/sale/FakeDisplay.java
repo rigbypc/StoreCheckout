@@ -2,6 +2,8 @@ package point.of.sale;
 
 public class FakeDisplay implements Display {
 
+	String lastLine;
+	
 	public FakeDisplay() {
 
 	}
@@ -9,7 +11,12 @@ public class FakeDisplay implements Display {
 	@Override
 	public void showLine(String line) {
 		System.out.println(line);
-
+		lastLine = line;
 	}
+	
+	public String getLastLine() {
+		return lastLine;
+	}
+	
 
 }
