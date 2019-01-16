@@ -4,12 +4,12 @@ package point.of.sale;
 public class Sale {
 	
 	HashStorage hashLookup;
-	ArtR56Display artR56;
+	Display display;
 	
 	public Sale () {
 		
 		//the display terminal is called ArtR56
-		artR56 = new ArtR56Display();
+		display = new FakeDisplay();
 		
 		//Storage, add the items in the store
 		HashStorage hashLookup = new HashStorage();
@@ -20,13 +20,13 @@ public class Sale {
 	
 	public void scan(String barcode) {
 		//display the barcode
-		artR56.showLine(barcode);
+		display.showLine(barcode);
 		
 		//lookup barcode in postgres and get item
 		String item = hashLookup.barcode(barcode);
 		
 		//display the item
-		artR56.showLine(item);
+		display.showLine(item);
 		
 	}
 

@@ -1,6 +1,6 @@
 package point.of.sale;
 
-public class ArtR56Display {
+public class ArtR56Display implements Display {
 
 	ArtR56 artR56;
 	

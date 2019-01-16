@@ -14,8 +14,10 @@ public class TestSale {
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testScan() {
+		Sale sale = new Sale();
+		sale.scan("1A");
+		//fail("Not yet implemented");
 	}
 
 }
