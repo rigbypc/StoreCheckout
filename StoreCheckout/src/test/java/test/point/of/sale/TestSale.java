@@ -25,6 +25,8 @@ public class TestSale {
 		Sale sale = new Sale(display);
 		sale.scan("1A");
 		verify(display).showLine("Milk, 3.99");
+		verify(display).showLine("1A");
+		
 	}
 
 }
