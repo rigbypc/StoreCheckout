@@ -1,11 +1,15 @@
 package test.point.of.sale;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import point.of.sale.*;
+import point.of.sale.Display;
+import point.of.sale.FakeDisplay;
+import point.of.sale.Sale;
+
+import static org.mockito.Mockito.*;
 
 public class TestSale {
 
@@ -16,11 +20,11 @@ public class TestSale {
 	@Test
 	public void testScan() {
 		
-		FakeDisplay display = new FakeDisplay();
+		Display display = mock(Display.class);
 		
 		Sale sale = new Sale(display);
 		sale.scan("1A");
-		assertEquals("Milk, 3.99", display.getLastLine());
+		verify(display).showLine("Milk, 3.99");
 	}
 
 }
