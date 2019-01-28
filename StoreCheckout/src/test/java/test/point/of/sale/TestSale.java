@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InOrder;
 
 import point.of.sale.Display;
 import point.of.sale.FakeDisplay;
@@ -24,8 +25,9 @@ public class TestSale {
 		
 		Sale sale = new Sale(display);
 		sale.scan("1A");
-		verify(display).showLine("Milk, 3.99");
-		verify(display).showLine("1A");
+		InOrder inOrder = inOrder(display);
+		inOrder.verify(display).showLine("1A");
+		inOrder.verify(display).showLine("Milk, 3.99");
 		
 	}
 
