@@ -6,17 +6,13 @@ public class Sale {
 	HashStorage hashLookup;
 	Display display;
 	
-	public Sale(Display display) {
-		init(display);
+	public Sale(Display display, HashStorage hashStorage) {
+		this.display = display;
+		this.hashLookup = hashStorage;
 	}
 	
 	public Sale() {
-		init(new ArtR56Display());
-	}
-	
-	public void init(Display display) {
-		
-		this.display = display;
+		display = new ArtR56Display();
 		
 		//Storage, add the items in the store
 		hashLookup = new HashStorage();
