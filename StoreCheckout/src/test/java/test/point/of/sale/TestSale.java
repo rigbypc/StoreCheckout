@@ -22,18 +22,21 @@ public class TestSale {
 	public void testScan() {
 		
 		Display display = mock(Display.class);
+		HashStorage hashStorage = mock(HashStorage.class);
+		when(hashStorage.barcode("1A")).thenReturn("Milk, 3.99");
 		
-		Sale sale = new Sale(display);
+		Sale sale = new Sale(display, hashStorage);
 		
 		
 		sale.scan("1A");
-		InOrder inOrder = inOrder(display);
+		InOrder inOrder = inOrder(display, hashStorage);
 		inOrder.verify(display).showLine("1A");
+		inOrder.verify(hashStorage).barcode("1A");
 		inOrder.verify(display).showLine("Milk, 3.99");
 		
 	}
 	
-	@Test
+	//@Test
 	public void testMockStubFun() {
 		
 		//nothing is under test, all objects are mocked, this is just for fun!
