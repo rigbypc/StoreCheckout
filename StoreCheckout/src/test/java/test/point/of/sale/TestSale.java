@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
 
 import point.of.sale.Display;
@@ -25,12 +26,19 @@ public class TestSale {
 		HashStorage hashStorage = mock(HashStorage.class);
 		when(hashStorage.barcode("1A")).thenReturn("Milk, 3.99");
 		
+		ArgumentCaptor<String> argCaptor = ArgumentCaptor.forClass(String.class);
+		
+		
 		Sale sale = new Sale(display, hashStorage);
 		sale.scan("1A");
 		
 		InOrder inOrder = inOrder(display, hashStorage);
-		inOrder.verify(hashStorage).barcode("1A");
-		inOrder.verify(display).showLine("1A");
+		
+		//whatever value is being requested from the data store is ...
+		inOrder.verify(hashStorage).barcode(argCaptor.capture());
+		// also being displayed
+		inOrder.verify(display).showLine(argCaptor.getValue());
+		
 		inOrder.verify(display).showLine("Milk, 3.99");
 		
 	}
