@@ -21,11 +21,13 @@ public class Sale {
 	}
 	
 	public void scan(String barcode) {
-		//display the barcode
-		display.showLine(barcode);
 		
 		//lookup barcode in postgres and get item
 		String item = hashLookup.barcode(barcode);
+		
+		//display the barcode
+		display.showLine(barcode);
+				
 		
 		//display the item
 		display.showLine(item);

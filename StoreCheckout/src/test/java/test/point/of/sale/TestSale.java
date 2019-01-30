@@ -26,12 +26,11 @@ public class TestSale {
 		when(hashStorage.barcode("1A")).thenReturn("Milk, 3.99");
 		
 		Sale sale = new Sale(display, hashStorage);
-		
-		
 		sale.scan("1A");
+		
 		InOrder inOrder = inOrder(display, hashStorage);
-		inOrder.verify(display).showLine("1A");
 		inOrder.verify(hashStorage).barcode("1A");
+		inOrder.verify(display).showLine("1A");
 		inOrder.verify(display).showLine("Milk, 3.99");
 		
 	}
