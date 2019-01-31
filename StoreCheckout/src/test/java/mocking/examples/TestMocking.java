@@ -6,12 +6,33 @@ import org.junit.Test;
 
 import static org.mockito.Mockito.*;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
 
 public class TestMocking {
 
+	
+	@Test
+	public void testListSpy() {
+		//a real LinkedList
+		List<String> list = new LinkedList<String>();
+		//a mocked list spying on the real LinkedList
+		List<String> listSpy = spy(list);
+		
+		//a stub on size
+		when(listSpy.size()).thenReturn(100);
+		
+		// add to the real LinkedList
+		listSpy.add("first");
+		//get from real Linked list
+		assertEquals(listSpy.get(0), "first");
+		
+		//size from spy
+		assertEquals(listSpy.size(), 100);
+		
+	}
 	
 	@Test
 	public void testStack() {
