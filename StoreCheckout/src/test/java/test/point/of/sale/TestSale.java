@@ -11,6 +11,8 @@ import point.of.sale.*;
 
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
+
 public class TestSale {
 
 	Display display;
@@ -35,10 +37,20 @@ public class TestSale {
 		
 		Sale sale = new Sale(display, hashStorage, interac);
 		sale.scan("1A");
+		sale.completePurchase();
 		
 		verify(hashStorage).barcode("1A");
 		verify(display).showLine("1A");
 		verify(display).showLine("Milk, 3.99");
+		
+		//check that the a list is passed to the pay function
+		verify(interac).pay(any(ArrayList.class));
+		
+		//verifying the contents
+		ArrayList<String> payItems = new ArrayList<String>();
+		payItems.add("Milk, 3.99");
+		verify(interac).pay(payItems);
+		
 		
 	}
 	
