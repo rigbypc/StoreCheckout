@@ -13,18 +13,27 @@ import static org.mockito.Mockito.*;
 
 public class TestSale {
 
+	Display display;
+	HashStorage hashStorage;
+	Interac interac;
+	
+	
 	@Before
 	public void setUp() throws Exception {
+		display = mock(Display.class);
+		
+		hashStorage = mock(HashStorage.class);
+		when(hashStorage.barcode("1A")).thenReturn("Milk, 3.99");
+		
+		interac = mock(Interac.class); 
+		
 	}
 
 	@Test
 	public void testScan() {
 		
-		Display display = mock(Display.class);
-		HashStorage hashStorage = mock(HashStorage.class);
-		when(hashStorage.barcode("1A")).thenReturn("Milk, 3.99");
 		
-		Sale sale = new Sale(display, hashStorage);
+		Sale sale = new Sale(display, hashStorage, interac);
 		sale.scan("1A");
 		
 		verify(hashStorage).barcode("1A");
@@ -36,15 +45,10 @@ public class TestSale {
 	@Test
 	public void testScanArgCaptor() {
 		
-		Display display = mock(Display.class);
-		
-		HashStorage hashStorage = mock(HashStorage.class);
-		when(hashStorage.barcode("1A")).thenReturn("Milk, 3.99");
-		
 		ArgumentCaptor<String> argCaptor = ArgumentCaptor.forClass(String.class);
 		
 		
-		Sale sale = new Sale(display, hashStorage);
+		Sale sale = new Sale(display, hashStorage, interac);
 		sale.scan("1A");
 		
 		InOrder inOrder = inOrder(display, hashStorage);

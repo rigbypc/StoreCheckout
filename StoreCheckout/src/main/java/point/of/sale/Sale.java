@@ -9,21 +9,23 @@ public class Sale {
 	Interac interac;
 	ArrayList<String> items = new ArrayList<>();
 	
-	public Sale(Display display, HashStorage hashStorage) {
+	//for testing purposes
+	public Sale(Display display, HashStorage hashStorage, Interac interac) {
 		this.display = display;
 		this.hashLookup = hashStorage;
+		this.interac = interac;
 	}
 	
+	//original legacy
 	public Sale() {
-		//display
-		display = new ArtR56Display();
+		
+		this(new ArtR56Display(), new HashStorage(), new Interac(12));
 		
 		//Storage, add the items in the store
 		hashLookup = new HashStorage();
 		hashLookup.put("1A", "Milk, 3.99");
 		hashLookup.put("2A", "Bread, 4.99");
 		
-		this.interac = new Interac(12);
 	}
 	
 	public void completePurchase() {

@@ -11,7 +11,7 @@ public class Interac {
 	
 	public void pay(ArrayList<String> items) {
 		for (String item : items) {
-			System.out.printf("Will make call to interac payment on channel %d for %s",
+			System.out.printf("Will make call to interac payment on channel %s for %d",
 					item, channel);
 		}
 		
