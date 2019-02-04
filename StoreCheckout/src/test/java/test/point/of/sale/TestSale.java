@@ -33,9 +33,11 @@ public class TestSale {
 
 	@Test 
 	public void testSupercedeInterac() {
+		//the real interac client
 		Interac realInterac = new Interac(12);
 		Sale sale = new Sale(display, hashStorage, realInterac);
 		
+		//supercede aka replace the real interac with the mock
 		sale.testingOnlySupercedeInterac(interac);
 		
 		sale.scan("1A");
