@@ -12,7 +12,6 @@ public class Sale {
 	public Sale(Display display, HashStorage hashStorage) {
 		this.display = display;
 		this.hashLookup = hashStorage;
-		this.interac = new Interac(12);
 	}
 	
 	public Sale() {
@@ -27,17 +26,23 @@ public class Sale {
 		this.interac = new Interac(12);
 	}
 	
+	public void completePurchase() {
+		interac.pay(items);
+	}
+	
 	public void scan(String barcode) {
-		
-		//lookup barcode in postgres and get item
+				
+		//lookup barcode in storage and get item
 		String item = hashLookup.barcode(barcode);
 		
 		//display the barcode
 		display.showLine(barcode);
-				
 		
 		//display the item
 		display.showLine(item);
+		
+		//Store it for payment 
+		items.add(item);
 		
 	}
 
