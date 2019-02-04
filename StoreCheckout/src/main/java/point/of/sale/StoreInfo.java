@@ -25,5 +25,10 @@ public class StoreInfo {
 		
 		return instance;
 	}
+	
+	public static StoreInfo testingOnlyResetSinglton() {
+		instance = new StoreInfo();
+		return instance;
+	}
 
 }

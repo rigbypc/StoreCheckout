@@ -29,16 +29,28 @@ public class TestSale {
 		
 		interac = mock(Interac.class); 
 		
+		StoreInfo.getInstance().testingOnlyResetSinglton();
+		
+	}
+	
+	@Test
+	public void testStoreInfo() {
+		StoreInfo storeInfo = StoreInfo.getInstance();
+		storeInfo.setName("Concordia Store");
+		assertEquals("Concordia Store", storeInfo.getName());
 	}
 
 	@Test 
 	public void testSupercedeInterac() {
+		
 		//the real interac client
 		Interac realInterac = new Interac(12);
 		Sale sale = new Sale(display, hashStorage, realInterac);
 		
 		//supercede aka replace the real interac with the mock
 		sale.testingOnlySupercedeInterac(interac);
+		
+		verify(display).showLine("No Name");
 		
 		sale.scan("1A");
 		sale.completePurchase();

@@ -14,6 +14,9 @@ public class Sale {
 		this.display = display;
 		this.hashLookup = hashStorage;
 		this.interac = interac;
+		
+		display.showLine(StoreInfo.getInstance().getName());
+		
 	}
 	
 	//original legacy
