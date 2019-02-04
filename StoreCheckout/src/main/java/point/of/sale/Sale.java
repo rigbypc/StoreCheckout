@@ -48,4 +48,9 @@ public class Sale {
 		
 	}
 
+	public void testingOnlySupercedeInterac(Interac interac) {
+		this.interac = interac;
+		
+	}
+
 }
