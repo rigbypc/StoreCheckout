@@ -29,15 +29,14 @@ public class TestSale {
 		
 		interac = mock(Interac.class); 
 		
-		StoreInfo.getInstance().testingOnlyResetSinglton();
+		StoreInfo.testingOnlyResetSinglton();
 		
 	}
 	
 	@Test
 	public void testStoreInfo() {
-		StoreInfo storeInfo = StoreInfo.getInstance();
-		storeInfo.setName("Concordia Store");
-		assertEquals("Concordia Store", storeInfo.getName());
+		StoreInfo.getInstance().setName("Concordia Store");
+		assertEquals("Concordia Store", StoreInfo.getInstance().getName());
 	}
 
 	@Test 
