@@ -27,14 +27,22 @@ public class TestSaleMockito {
 	
 	@Before
 	public void setUpSale() {
+		
+		when(storage.barcode("1B")).thenReturn("Chocolate, 4.99");
+		
 		sale = new Sale(display, storage, interac);
 	}
 	
 	
 	@Test
 	public void testScan() {
-		sale.scan("1A");
-		verify(display).showLine("1A");
+		sale.scan("1B");
+		verify(display).showLine("1B");
+		
+		verify(storage).barcode("1B");
+		verify(display).showLine("Chocolate, 4.99");
+		
+		
 	}
 
 }
