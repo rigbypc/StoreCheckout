@@ -9,7 +9,7 @@ public class SaleInjectorModule extends AbstractModule {
 
 	@Override
     protected void configure() {
-		bind(Display.class).to(Display.class);
+		bind(Display.class).to(ConsoleDisplay.class);
 		
 		bind(Interac.class).toInstance(new Interac(12));
 		
