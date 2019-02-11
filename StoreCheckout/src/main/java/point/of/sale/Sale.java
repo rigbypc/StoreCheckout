@@ -2,14 +2,21 @@ package point.of.sale;
 
 import java.util.ArrayList;
 
+import com.google.inject.Inject;
+
 public class Sale {
 	
+	@Inject
 	HashStorage hashLookup;
+	@Inject
 	Display display;
+	@Inject
 	Interac interac;
+	
 	ArrayList<String> items = new ArrayList<>();
 	
 	//for testing purposes
+	@Inject
 	public Sale(Display display, HashStorage hashStorage, Interac interac) {
 		this.display = display;
 		this.hashLookup = hashStorage;
