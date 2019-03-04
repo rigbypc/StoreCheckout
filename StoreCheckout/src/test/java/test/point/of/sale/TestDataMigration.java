@@ -35,6 +35,9 @@ public class TestDataMigration {
 		
 		
 		//Shadow reads (checks that old and new datastores return the same value
+		storage.testingOnlyHashPut("5", "Wine, 19.99");
+		storage.barcode("5");
+		
 		
 		//Read and write from new datastore (get rid of old datastore)
 		
