@@ -29,6 +29,9 @@ public class TestDataMigration {
 		assertEquals(0, storage.checkConsistency());
 		
 		//Shadow writes (writes to old and new datastore)
+		storage.put("4", "Bread, 5.99");
+		//no inconsistency, because we shadow write to the new datastore
+		assertEquals(0, storage.checkConsistency());
 		
 		
 		//Shadow reads (checks that old and new datastores return the same value
