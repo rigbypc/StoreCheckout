@@ -18,9 +18,10 @@ public class TestDataMigration {
 		storage.put("2", "Beer, 10.99");
 		
 		//Forklift (mass migration)
-		
+		storage.forklift();
 		
 		//Consistency Checking (includes incremental replication)
+		
 		
 		//Shadow writes (writes to old and new datastore)
 		

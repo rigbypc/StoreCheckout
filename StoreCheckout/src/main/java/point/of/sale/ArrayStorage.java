@@ -2,6 +2,9 @@ package point.of.sale;
 
 public class ArrayStorage extends HashStorage {
 
+	int size = 999;
+	String[] array;
+	
 	@Override
 	public void put(String barcode, String item) {
 		// TODO Auto-generated method stub
@@ -15,7 +18,15 @@ public class ArrayStorage extends HashStorage {
 	}
 
 	public ArrayStorage() {
-		// TODO Auto-generated constructor stub
+		array = new String[size];
+	}
+	
+	public void forklift() {
+		//copy over all the data that is in the hash
+		for (String barcode : hashMap.keySet()) {
+			array[Integer.parseInt(barcode)] = hashMap.get(barcode);
+			
+		}
 	}
 
 }
