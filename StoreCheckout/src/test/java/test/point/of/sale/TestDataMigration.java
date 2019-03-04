@@ -6,8 +6,6 @@ import static org.mockito.Mockito.*;
 
 import org.junit.Test;
 
-import point.of.sale.Interac;
-
 public class TestDataMigration {
 
 	@Test
@@ -15,11 +13,12 @@ public class TestDataMigration {
 		Display display = mock(Display.class);
 		Interac interac = mock(Interac.class);
 		
-		HashStorage storage =  new HashStorage();
+		ArrayStorage storage =  new ArrayStorage();
 		storage.put("1", "Milk, 3.99");
 		storage.put("2", "Beer, 10.99");
 		
 		//Forklift (mass migration)
+		
 		
 		//Consistency Checking (includes incremental replication)
 		
