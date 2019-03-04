@@ -5,12 +5,18 @@ public class ArrayStorage extends HashStorage {
 	int size = 999;
 	String[] array;
 	
+	public void testingOnlyHashPut(String barcode, String item) {
+		// TODO Auto-generated method stub
+		super.put(barcode, item);
+	}
+	
 	@Override
 	public void put(String barcode, String item) {
 		// TODO Auto-generated method stub
 		super.put(barcode, item);
 		
 		//asynch
+		//shadow write
 		array[Integer.parseInt(barcode)] = item;
 		
 		checkConsistency();

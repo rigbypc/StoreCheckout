@@ -22,7 +22,7 @@ public class TestDataMigration {
 		assertEquals(0, storage.checkConsistency());
 		
 		//Consistency Checking (includes incremental replication)
-		storage.put("3", "Eggs, 4.99");
+		storage.testingOnlyHashPut("3", "Eggs, 4.99");
 		// 1 inconsistency, because we don't do shadow writing
 		assertEquals(1, storage.checkConsistency());
 		//0 inconsistent, because we incrementally update
