@@ -19,9 +19,11 @@ public class TestDataMigration {
 		
 		//Forklift (mass migration)
 		storage.forklift();
+		assertEquals(0, storage.checkConsistency());
 		
 		//Consistency Checking (includes incremental replication)
-		
+		storage.put("3", "Eggs, 4.99");
+		assertEquals(0, storage.checkConsistency());
 		
 		//Shadow writes (writes to old and new datastore)
 		
