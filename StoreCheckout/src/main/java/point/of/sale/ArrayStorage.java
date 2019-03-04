@@ -9,6 +9,11 @@ public class ArrayStorage extends HashStorage {
 	public void put(String barcode, String item) {
 		// TODO Auto-generated method stub
 		super.put(barcode, item);
+		
+		//asynch
+		array[Integer.parseInt(barcode)] = item;
+		
+		checkConsistency();
 	}
 
 	@Override
