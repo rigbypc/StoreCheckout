@@ -14,8 +14,8 @@ public class TestDataMigration {
 		Interac interac = mock(Interac.class);
 		
 		ArrayStorage storage =  new ArrayStorage();
-		storage.put("1", "Milk, 3.99");
-		storage.put("2", "Beer, 10.99");
+		storage.testingOnlyHashPut("1", "Milk, 3.99");
+		storage.testingOnlyHashPut("2", "Beer, 10.99");
 		
 		//Forklift (mass migration)
 		storage.forklift();
@@ -37,6 +37,11 @@ public class TestDataMigration {
 		//Shadow reads (checks that old and new datastores return the same value
 		storage.testingOnlyHashPut("5", "Wine, 19.99");
 		storage.barcode("5");
+		assertEquals(1, storage.getReadInconsistencies());
+		
+		storage.barcode("5");
+		assertEquals(1, storage.getReadInconsistencies());
+		
 		
 		
 		//Read and write from new datastore (get rid of old datastore)

@@ -13,7 +13,7 @@ public class ArrayStorage extends HashStorage {
 	
 	@Override
 	public void put(String barcode, String item) {
-		// TODO Auto-generated method stub
+		// still write to the old HashStorage
 		super.put(barcode, item);
 		
 		//asynch
@@ -25,9 +25,11 @@ public class ArrayStorage extends HashStorage {
 
 	@Override
 	public String barcode(String barcode) {
+		//get the expected value from the old datastore
 		String expected = super.barcode(barcode);
 		
 		//should happen asynch
+		//shadow read
 		String actual = array[Integer.parseInt(barcode)];
 		if(!expected.equals(actual)) {
 			readInconsistencies++;
@@ -39,6 +41,10 @@ public class ArrayStorage extends HashStorage {
 		}
 		
 		return expected;
+	}
+
+	public int getReadInconsistencies() {
+		return readInconsistencies;
 	}
 
 	public ArrayStorage() {
