@@ -26,6 +26,9 @@ dependencies {
     
     //Guice
     compile group: 'com.google.inject', name: 'guice', version: '4.+'
+    
+    //hashing functions
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.5'
 }
 
 // In this section you declare where to find the dependencies of your project
