@@ -40,7 +40,7 @@ public class ArrayStorage extends HashStorage {
 			
 		}
 		
-		return expected;
+		return array[Integer.parseInt(barcode)];
 	}
 
 	public int getReadInconsistencies() {

@@ -39,13 +39,14 @@ public class TestDataMigration {
 		storage.barcode("5");
 		assertEquals(1, storage.getReadInconsistencies());
 		
+		//should still only have one read inconsistency as new datastore should be consistent now
 		storage.barcode("5");
 		assertEquals(1, storage.getReadInconsistencies());
 		
 		
-		
 		//Read and write from new datastore (get rid of old datastore)
-		
+		storage.put("6", "Cookies, 1.99");
+		assertEquals("Cookies, 1.99", storage.barcode("6"));
 		
 		Sale sale = new Sale(display, storage, interac);
 		
