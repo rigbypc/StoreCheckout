@@ -104,7 +104,7 @@ public class ArrayStorage extends HashStorage {
 		//check the consistency of the items for sale
 		for (int i = 0; i < array.length; i++) {
 			if (array[i] != null) {
-				items += Integer.toString(i) + array[i] + "; ";
+				items = hashValue(items.concat(Integer.toString(i) + array[i]));
 			}
 		}
 		
