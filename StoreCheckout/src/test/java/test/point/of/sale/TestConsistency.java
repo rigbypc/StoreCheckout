@@ -15,11 +15,12 @@ public class TestConsistency {
 		storage.put("1", "Milk, 3.99");
 		storage.put("2", "Beer, 4.99");
 		
-		//get the consistency value
-		storage.updateConsistencyCheck();
+		StoreConsistencyChecker checker = new StoreConsistencyChecker(storage);
 		
+		//get the consistency value
+		checker.updateConsistencyCheck();
 		//check that nothing has changed
-		assertTrue(storage.checkArrayConsistency());
+		assertTrue(checker.checkConsistency());
 		
 		
 	}

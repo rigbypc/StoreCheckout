@@ -4,8 +4,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 public class ArrayStorage extends HashStorage {
 
-	String itemCheck = "";
-	
 	int readInconsistencies = 0;
 	int size = 999;
 	String[] array;
@@ -92,36 +90,8 @@ public class ArrayStorage extends HashStorage {
 				+ "\n\t actual = " + actual);
 	}
 	
-
-	public void updateConsistencyCheck() {
-		itemCheck = calculateConsistency();
-	}
-	
-	private String calculateConsistency() {
-
-		String items = "";
-		
-		//check the consistency of the items for sale
-		for (int i = 0; i < array.length; i++) {
-			if (array[i] != null) {
-				items = hashValue(items.concat(Integer.toString(i) + array[i]));
-			}
-		}
-		
-		return items;
-		
-	}
-	
-	public boolean checkArrayConsistency() {
-		String actual = calculateConsistency();
-		
-		System.out.println("expect = " + itemCheck + " vs " + "actual = " + actual);
-		
-		return itemCheck.equals(actual);
-	}
-	
-	private String hashValue(String value) {
-		return DigestUtils.sha256Hex(value).toUpperCase();
+	public String[] getCopyArrayStorage() {
+		return array.clone();
 	}
 
 }
