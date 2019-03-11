@@ -24,7 +24,11 @@ public class StoreConsistencyChecker {
 		for (int i = 0; i < array.length; i++) {
 			if (array[i] != null) {
 				//use raw values
-				items += Integer.toString(i) + " " + array[i] + "; ";	
+				//items += Integer.toString(i) + " " + array[i] + "; ";	
+				
+				//use a hash
+				items += hashValue(Integer.toString(i) + array[i]) + " ";
+				
 				
 			}
 		}
