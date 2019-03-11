@@ -9,7 +9,9 @@ public class ArrayStorage extends HashStorage {
 	String[] array;
 	
 	public ArrayStorage() {
-		array = new String[size];
+		if (StoreToggles.isEnableArray) {
+			array = new String[size];
+		}
 	}
 	
 	public int getReadInconsistencies() {
@@ -19,43 +21,63 @@ public class ArrayStorage extends HashStorage {
 	//read from the datastore
 	@Override
 	public String barcode(String barcode) {
-		//get the expected value from the old datastore
-		String expected = super.barcode(barcode);
 		
-		//should happen asynch
-		//shadow read
-		String actual = array[Integer.parseInt(barcode)];
-		if(!expected.equals(actual)) {
-			readInconsistencies++;
+		if (StoreToggles.isEnableArray && StoreToggles.isEnableHash) {
+			//get the expected value from the old datastore
+			String expected = super.barcode(barcode);
 			
-			array[Integer.parseInt(barcode)] = expected;
-			
-			violation(barcode, expected, actual);
-			
+			//should happen asynch
+			//shadow read
+			String actual = array[Integer.parseInt(barcode)];
+			if(!expected.equals(actual)) {
+				readInconsistencies++;
+				
+				array[Integer.parseInt(barcode)] = expected;
+				
+				violation(barcode, expected, actual);
+				
+			}
 		}
 		
-		//write from new datastore
+		if (StoreToggles.isEnableHash) {
+			return super.barcode(barcode);
+		}
+		
+		//read from new datastore
 		return array[Integer.parseInt(barcode)];
+		
+		
+		
 	}
 
 	//write to the datastore
 	@Override
 	public void put(String barcode, String item) {
-		// still write to the old HashStorage
-		super.put(barcode, item);
 		
-		//should be asynch
-		//shadow write
-		array[Integer.parseInt(barcode)] = item;
+		if (StoreToggles.isEnableHash) {
+			// still write to the old HashStorage
+			super.put(barcode, item);
+		}
+		
+		if (StoreToggles.isEnableArray) {
+			//shadow write
+			array[Integer.parseInt(barcode)] = item;
+		}
 		
 		checkConsistency();
 	}
 	
 	public void testingOnlyHashPut(String barcode, String item) {
-		super.put(barcode, item);
+		if (StoreToggles.isUnderTest) { 
+			super.put(barcode, item);
+		}
 	}
 
 	public void forklift() {
+		
+		if (! (StoreToggles.isEnableArray && StoreToggles.isEnableHash)) {
+			return;
+		}
 		
 		//copy over all the data that is in the hash
 		for (String barcode : hashMap.keySet()) {
@@ -65,6 +87,11 @@ public class ArrayStorage extends HashStorage {
 	}
 	
 	public int checkConsistency() {
+		
+		if (! (StoreToggles.isEnableArray && StoreToggles.isEnableHash)) {
+			return 0;
+		}
+		
 		int inconsistency = 0;
 		
 		for (String barcode : hashMap.keySet()) {
@@ -95,7 +122,11 @@ public class ArrayStorage extends HashStorage {
 	}
 	
 	public String[] getCopyArrayStorage() {
-		return array.clone();
+		if (StoreToggles.isEnableArray) {
+			return array.clone();
+		}
+		
+		return null;
 	}
 
 }
