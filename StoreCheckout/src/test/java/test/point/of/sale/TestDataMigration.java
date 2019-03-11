@@ -9,7 +9,34 @@ import org.junit.Test;
 public class TestDataMigration {
 
 	@Test
-	public void test() {
+	public void testArrayOnly() {
+		StoreToggles.isEnableArray = true;
+		StoreToggles.isEnableHash = false;
+		StoreToggles.isUnderTest = false;
+		
+		
+		Display display = mock(Display.class);
+		Interac interac = mock(Interac.class);
+			
+		
+		ArrayStorage storage =  new ArrayStorage();
+		storage.put("1", "Milk, 3.99");
+		
+		Sale sale = new Sale(display, storage, interac);
+		
+		sale.scan("1");
+					
+		verify(display).showLine("Milk, 3.99");
+	}
+	
+	@Test
+	public void testDataMigration() {
+		
+		StoreToggles.isEnableArray = true;
+		StoreToggles.isEnableHash = true;
+		StoreToggles.isUnderTest = true;
+		
+		
 		Display display = mock(Display.class);
 		Interac interac = mock(Interac.class);
 		
