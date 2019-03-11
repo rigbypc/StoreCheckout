@@ -1,30 +1,22 @@
 package point.of.sale;
 
-import org.apache.commons.codec.digest.DigestUtils;
-
 public class ArrayStorage extends HashStorage {
 
 	int readInconsistencies = 0;
+	
+	// Kludge: demonstrating migration to new datastore as array
 	int size = 999;
 	String[] array;
 	
-	public void testingOnlyHashPut(String barcode, String item) {
-		// TODO Auto-generated method stub
-		super.put(barcode, item);
+	public ArrayStorage() {
+		array = new String[size];
 	}
 	
-	@Override
-	public void put(String barcode, String item) {
-		// still write to the old HashStorage
-		super.put(barcode, item);
-		
-		//asynch
-		//shadow write
-		array[Integer.parseInt(barcode)] = item;
-		
-		checkConsistency();
+	public int getReadInconsistencies() {
+		return readInconsistencies;
 	}
-
+	
+	//read from the datastore
 	@Override
 	public String barcode(String barcode) {
 		//get the expected value from the old datastore
@@ -42,18 +34,29 @@ public class ArrayStorage extends HashStorage {
 			
 		}
 		
+		//write from new datastore
 		return array[Integer.parseInt(barcode)];
 	}
 
-	public int getReadInconsistencies() {
-		return readInconsistencies;
-	}
-
-	public ArrayStorage() {
-		array = new String[size];
+	//write to the datastore
+	@Override
+	public void put(String barcode, String item) {
+		// still write to the old HashStorage
+		super.put(barcode, item);
+		
+		//should be asynch
+		//shadow write
+		array[Integer.parseInt(barcode)] = item;
+		
+		checkConsistency();
 	}
 	
+	public void testingOnlyHashPut(String barcode, String item) {
+		super.put(barcode, item);
+	}
+
 	public void forklift() {
+		
 		//copy over all the data that is in the hash
 		for (String barcode : hashMap.keySet()) {
 			array[Integer.parseInt(barcode)] = hashMap.get(barcode);
@@ -71,6 +74,7 @@ public class ArrayStorage extends HashStorage {
 			if(!expected.equals(actual)) {
 				//record the inconsistency
 				inconsistency++;
+				
 				//print it
 				violation(barcode, expected, actual);
 				
