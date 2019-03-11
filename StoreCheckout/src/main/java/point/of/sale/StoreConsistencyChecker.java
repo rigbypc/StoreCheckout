@@ -27,8 +27,10 @@ public class StoreConsistencyChecker {
 				//items += Integer.toString(i) + " " + array[i] + "; ";	
 				
 				//use a hash
-				items += hashValue(Integer.toString(i) + array[i]) + " ";
+				//items += hashValue(Integer.toString(i) + array[i]) + " ";
 				
+				//create a hash chain with the values in the store
+				items = hashValue(items + Integer.toString(i) + array[i]);
 				
 			}
 		}
