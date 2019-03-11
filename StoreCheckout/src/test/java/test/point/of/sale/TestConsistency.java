@@ -22,6 +22,19 @@ public class TestConsistency {
 		//check that nothing has changed
 		assertTrue(checker.checkConsistency());
 		
+		storage.put("3", "Wine, 19.99");
+		assertFalse(checker.checkConsistency());
+		
+		storage.put("2", "Beer, 0.01");
+		assertFalse(checker.checkConsistency());
+		
+		storage.put("2", "Beer, 1.99");
+		
+		
+		checker.updateConsistencyCheck();
+		//checker.updateConsistencyCheck();
+		assertTrue(checker.checkConsistency());
+		
 		
 	}
 	
