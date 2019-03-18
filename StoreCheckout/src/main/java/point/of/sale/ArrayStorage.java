@@ -1,8 +1,13 @@
 package point.of.sale;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class ArrayStorage extends HashStorage {
 
 	int readInconsistencies = 0;
+	
+	private static Logger logger = LogManager.getLogger("migration");
 	
 	// Kludge: demonstrating migration to new datastore as array
 	int size = 999;
@@ -11,6 +16,7 @@ public class ArrayStorage extends HashStorage {
 	public ArrayStorage() {
 		if (StoreToggles.isEnableArray) {
 			array = new String[size];
+			logger.trace("Initializing an array");
 		}
 		
 	}
