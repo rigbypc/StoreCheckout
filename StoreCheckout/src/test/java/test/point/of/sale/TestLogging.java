@@ -12,7 +12,7 @@ public class TestLogging {
 	private static Logger rootLogger = LogManager.getLogger();
 	private static Logger fileLogger = LogManager.getLogger("migration");
 	
-	//@Test
+	@Test
 	public void testRoot() {
 	
 		rootLogger.debug("Debug");

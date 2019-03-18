@@ -7,7 +7,7 @@ public class ArrayStorage extends HashStorage {
 
 	int readInconsistencies = 0;
 	
-	private static Logger logger = LogManager.getLogger("migration");
+	private static Logger logger = LogManager.getLogger("migration.console");
 	
 	// Kludge: demonstrating migration to new datastore as array
 	int size = 999;
@@ -37,6 +37,8 @@ public class ArrayStorage extends HashStorage {
 			//shadow read
 			String actual = array[Integer.parseInt(barcode)];
 			if(!expected.equals(actual)) {
+				
+				logger.warn("Read Inconsistency");
 				readInconsistencies++;
 				
 				array[Integer.parseInt(barcode)] = expected;
@@ -47,6 +49,9 @@ public class ArrayStorage extends HashStorage {
 		}
 		
 		if (StoreToggles.isEnableHash) {
+			
+			logger.trace("Read from Hash" + barcode);
+			
 			return super.barcode(barcode);
 		}
 		
@@ -106,6 +111,8 @@ public class ArrayStorage extends HashStorage {
 			String actual = array[Integer.parseInt(barcode)];
 			
 			if(!expected.equals(actual)) {
+				
+				logger.warn("Data inconsistency");
 				//record the inconsistency
 				inconsistency++;
 				
@@ -122,7 +129,7 @@ public class ArrayStorage extends HashStorage {
 	}
 	
 	private void violation(String barcode, String expected, String actual) {
-		System.out.println("Consistency Violation!\n" + 
+		logger.debug("Consistency Violation!\n" + 
 				"barcode = " + barcode +
 				"\n\t expected = " + expected
 				+ "\n\t actual = " + actual);
