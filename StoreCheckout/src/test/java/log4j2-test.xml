@@ -3,13 +3,23 @@
 	<Appenders>
     	<Console name="STDIO" target="SYSTEM_OUT">
     		<PatternLayout>
-	        	<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+	        	<Pattern>%d %p %c [%t] %m%n</Pattern>
 	      	</PatternLayout>
     	</Console>
+    	
+    	<File name="Migration" fileName="logs/Migration.log">
+	      	<PatternLayout>
+	        	<Pattern>%d %p %c [%t] %m%n</Pattern>
+	      	</PatternLayout>
+    	</File>
+    	
 	</Appenders>
 	<Loggers>
-		<Root level="all">
+		<Root level="debug">
 	      <AppenderRef ref="STDIO"/>
 	    </Root>
+	    <Logger name = "migration" level = "error" additivity = "false">
+	    	<AppenderRef ref= "Migration"/>
+	    </Logger>
 	</Loggers>
 </Configuration>
