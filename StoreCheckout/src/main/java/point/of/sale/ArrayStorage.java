@@ -7,7 +7,7 @@ public class ArrayStorage extends HashStorage {
 
 	int readInconsistencies = 0;
 	
-	private static Logger logger = LogManager.getLogger("migration.console");
+	private static Logger logger = LogManager.getLogger("migration");
 	
 	// Kludge: demonstrating migration to new datastore as array
 	int size = 999;
