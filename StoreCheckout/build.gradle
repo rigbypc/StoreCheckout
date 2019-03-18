@@ -29,6 +29,11 @@ dependencies {
     
     //hashing functions
     compile group: 'commons-codec', name: 'commons-codec', version: '1.5'
+    
+    //logging
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.+'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.+'
+    
 }
 
 // In this section you declare where to find the dependencies of your project

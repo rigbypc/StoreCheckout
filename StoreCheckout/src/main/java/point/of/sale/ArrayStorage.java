@@ -12,6 +12,7 @@ public class ArrayStorage extends HashStorage {
 		if (StoreToggles.isEnableArray) {
 			array = new String[size];
 		}
+		
 	}
 	
 	public int getReadInconsistencies() {
@@ -119,6 +120,7 @@ public class ArrayStorage extends HashStorage {
 				"barcode = " + barcode +
 				"\n\t expected = " + expected
 				+ "\n\t actual = " + actual);
+				
 	}
 	
 	public String[] getCopyArrayStorage() {
