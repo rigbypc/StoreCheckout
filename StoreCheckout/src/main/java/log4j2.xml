@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="warn" name="Sale" packages="">
-	<Appenders>
-    	<Console name="STDIO" target="SYSTEM_OUT">
-    		<PatternLayout>
-	        	<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
-	      	</PatternLayout>
-    	</Console>
-    	<File name="Migration" fileName="logs/Migration.log">
-	      	<PatternLayout>
-	        	<Pattern>%d %p %c [%t] %m%n</Pattern>
-	      	</PatternLayout>
-    	</File>
-	</Appenders>
-	<Loggers>
-		<Root level="all">
-	      <AppenderRef ref="STDIO"/>
-	    </Root>
-	    <Logger name = "migration" level = "warn" additivity = "false">
-	    	<AppenderRef ref= "Migration"/>
-	    </Logger>
-	    <Logger name = "migration.console" level = "trace" additivity = "true">
-	    	<AppenderRef ref= "STDIO"/>
-	    </Logger>
-	</Loggers>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="csvLog.fileName">migrationLog</Property>
+        <Property name="file-header">Time-Nanos, Time-Millis, Level, Thread ID, Thread Name, Thread Priority, Message, Logger-FQCN, Logger-Name, Marker, Thrown-Proxy, Source, Context-Map, Context-Stack</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="csvFile" 
+                     fileName="logs/${csvLog.fileName}.csv"
+                     filePattern="${csvLog.filename}-%d{MM-dd-yyyy}-%i.csv" >
+            <CsvLogEventLayout delimiter="," header="${file-header}\n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="200" />
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="info" additivity="false">
+            <AppenderRef ref="csvFile" level="info"/>
+        </Root>
+    </Loggers>
 </Configuration>

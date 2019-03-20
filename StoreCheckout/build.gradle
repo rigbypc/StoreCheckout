@@ -34,6 +34,10 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.+'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.+'
     
+    //write logs to CSV
+    compile group: 'org.apache.commons', name: 'commons-csv', version: '1.+'
+    
+    
 }
 
 // In this section you declare where to find the dependencies of your project
