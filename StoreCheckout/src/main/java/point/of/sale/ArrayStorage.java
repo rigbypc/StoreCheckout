@@ -7,7 +7,7 @@ public class ArrayStorage extends HashStorage {
 
 	int readInconsistencies = 0;
 	
-	private static Logger logger = LogManager.getLogger("migration");
+	private static Logger logger = LogManager.getLogger();
 	
 	// Kludge: demonstrating migration to new datastore as array
 	int size = 999;
@@ -19,6 +19,18 @@ public class ArrayStorage extends HashStorage {
 			logger.trace("Initializing an array");
 		}
 		
+		if (StoreToggles.isEnableArray) {
+			logger.info("Array Enabled");
+		}
+		
+		if (StoreToggles.isEnableHash) {
+			logger.info("Hash Enabled");
+		}
+		
+		if (StoreToggles.isUnderTest) {
+			logger.info("System is under test");
+		}
+		
 	}
 	
 	public int getReadInconsistencies() {
@@ -28,6 +40,8 @@ public class ArrayStorage extends HashStorage {
 	//read from the datastore
 	@Override
 	public String barcode(String barcode) {
+		
+		logger.info("Read");
 		
 		if (StoreToggles.isEnableArray && StoreToggles.isEnableHash) {
 			//get the expected value from the old datastore
@@ -66,6 +80,8 @@ public class ArrayStorage extends HashStorage {
 	@Override
 	public void put(String barcode, String item) {
 		
+		logger.info("Write");
+		
 		if (StoreToggles.isEnableHash) {
 			// still write to the old HashStorage
 			super.put(barcode, item);
@@ -76,7 +92,9 @@ public class ArrayStorage extends HashStorage {
 			array[Integer.parseInt(barcode)] = item;
 		}
 		
-		checkConsistency();
+		if(checkConsistency() > 0) {
+			logger.warn("Write Inconsistency");
+		}
 	}
 	
 	public void testingOnlyHashPut(String barcode, String item) {
