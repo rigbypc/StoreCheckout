@@ -15,10 +15,18 @@
             </Policies>
             <DefaultRolloverStrategy max="200" />
         </RollingFile>
+   		<File name="analytics" fileName="logs/Analytics.log">
+	      	<PatternLayout>
+	        	<Pattern>%d, %m%n</Pattern>
+	      	</PatternLayout>
+    	</File>
     </Appenders>
     <Loggers>
         <Root level="info" additivity="false">
             <AppenderRef ref="csvFile" level="info"/>
         </Root>
+        <Logger name = "Analytics" level = "info" additivity = "false">
+	    	<AppenderRef ref= "analytics"/>
+	    </Logger>
     </Loggers>
 </Configuration>
