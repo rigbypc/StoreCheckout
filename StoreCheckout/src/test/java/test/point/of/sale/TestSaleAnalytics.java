@@ -36,7 +36,7 @@ public class TestSaleAnalytics {
 		
 	}
 	
-	//@Test
+	@Test
 	public void testRollbackDiscount() {
 		
 		//new feature is off/dark
