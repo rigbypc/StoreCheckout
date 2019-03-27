@@ -36,7 +36,7 @@ public class TestSaleAnalytics {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testRollbackDiscount() {
 		
 		//new feature is off/dark
@@ -53,12 +53,27 @@ public class TestSaleAnalytics {
 		verify(display).showLine("Discount applied!");
 		
 		
-		//turn off the feature, no discount
+		//turn off the feature when there is a problem, no discount
 		StoreToggles.discountAllItems = false;
 		sale.completePurchase();
 		verify(display, times(1)).showLine("Discount applied!");
 	}
 	
-	
+	@Test
+	public void testRandom() {
+		int iterations = 10;
+		
+		AssignRandomDiscount rnd = new AssignRandomDiscount();
+		
+		for (int i = 0; i < iterations; i++) {
+			
+			//randomly assign x% of the sales to get discounts
+			StoreToggles.discountAllItems = rnd.getDiscount(30);
+			
+			Sale sale = new Sale(display, storage, interac);
+			sale.scan("2");
+			sale.completePurchase();
+		}
+	}
 	
 }
