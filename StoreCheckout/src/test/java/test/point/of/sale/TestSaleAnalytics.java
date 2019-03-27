@@ -61,7 +61,7 @@ public class TestSaleAnalytics {
 	
 	@Test
 	public void testRandom() {
-		int iterations = 10;
+		int iterations = 1000;
 		
 		AssignRandomDiscount rnd = new AssignRandomDiscount();
 		
@@ -71,9 +71,23 @@ public class TestSaleAnalytics {
 			StoreToggles.discountAllItems = rnd.getDiscount(30);
 			
 			Sale sale = new Sale(display, storage, interac);
-			sale.scan("2");
+			
+			if (StoreToggles.discountAllItems == true) {
+				buyItems(sale, 10);
+			}
+			else {
+				buyItems(sale, 3);
+			}
+			
 			sale.completePurchase();
 		}
+	}
+	
+	private void buyItems(Sale sale, int numToBuy) {
+		for (int i = 0; i < numToBuy; i++) {
+			sale.scan("2");
+		}
+		
 	}
 	
 }
