@@ -37,8 +37,26 @@ public class TestSaleAnalytics {
 	}
 	
 	@Test
-	public void test() {
-	
+	public void testRollbackDiscount() {
+		
+		//new feature is off/dark
+		StoreToggles.discountAllItems = false;
+		Sale sale = new Sale(display, storage, interac);
+		sale.scan("2");
+		sale.completePurchase();
+		verify(display).showLine("Beer, 9.99");
+		verify(display, never()).showLine("Discount applied!");
+		
+		//turn on new feature, see the discount
+		StoreToggles.discountAllItems = true;
+		sale.completePurchase();
+		verify(display).showLine("Discount applied!");
+		
+		
+		//turn off the feature, no discount
+		StoreToggles.discountAllItems = false;
+		sale.completePurchase();
+		verify(display, times(1)).showLine("Discount applied!");
 	}
 	
 	
