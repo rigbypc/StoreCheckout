@@ -25,7 +25,11 @@ public class FuzzTesting {
 				
 		Sale sale = new Sale(display, storage, interac);
 		
-		Integer rndBarcode = ThreadLocalRandom.current().nextInt(3, 1000+1);
+		//(null pointer) Tests the corner case and finds a bug that should be fixed
+		//Integer rndBarcode = ThreadLocalRandom.current().nextInt(3, 1000+1);
+		
+		// Array index out of bounds
+		Integer rndBarcode = ThreadLocalRandom.current().nextInt(1000, 10000+1);
 		
 		sale.scan(rndBarcode.toString());
 		verify(display).showLine("Milk, 3.99");
