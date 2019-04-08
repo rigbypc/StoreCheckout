@@ -25,7 +25,7 @@ public class FuzzTesting {
 				
 		Sale sale = new Sale(display, storage, interac);
 		
-		Integer rndBarcode = ThreadLocalRandom.current().nextInt(1, 1+1);
+		Integer rndBarcode = ThreadLocalRandom.current().nextInt(3, 1000+1);
 		
 		sale.scan(rndBarcode.toString());
 		verify(display).showLine("Milk, 3.99");
